@@ -20,4 +20,13 @@ class Playlists extends EndpointPaging {
   Pages<PlaylistSimple> get me {
     return _getPages('v1/me/playlists', (json) => Playlist.fromJson(json));
   }
+
+  /// [categoryId] - the Spotify category ID for the category.
+  Pages<PlaylistSimple> getByCategoryId(categoryId) {
+    return _getPages(
+        '$_path/categories/$categoryId/playlists',
+        (json) => PlaylistSimple.fromJson(json),
+        'playlists',
+        (json) => PlaylistsFeatured.fromJson(json));
+  }
 }
